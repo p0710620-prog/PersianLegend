@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Persian Legend</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ background:#090909;color:#eee;
+ font-family:Tahoma,sans-serif;
+ min-height:100vh;
+}
+:root{
+ --gold:#c6a15b;
+ --border:#40331e;
+ --card:#151515;
+}
+header{
+ display:flex;justify-content:space-between;
+ align-items:center;padding:22px 20px;
+}
+.menu{color:var(--gold);font-size:26px}
+.account{
+ border:1px solid var(--border);
+ padding:10px 15px;border-radius:25px;
+ color:var(--gold);font-size:12px;
+}
+.brand{text-align:center;padding:22px 10px}
+.emblem{font-size:55px;color:var(--gold)}
+.brand h1{
+ font-family:Georgia,serif;
+ font-size:25px;color:#dfbd79;
+ letter-spacing:2px;margin-top:8px
+}
+.brand p{
+ color:#a88b51;font-size:10px;
+ letter-spacing:4px;margin-top:8px
+}
+.page{display:none;padding:20px}
+.page.active{display:block}
+.status{
+ display:flex;justify-content:space-around;
+ background:var(--card);padding:17px;
+ border:1px solid var(--border);
+ border-radius:30px;margin-bottom:30px;
+ font-size:12px;color:#aaa
+}
+.connect-area{text-align:center;margin:25px 0}
+.connect{
+ width:185px;height:185px;border-radius:50%;
+ border:2px solid var(--gold);
+ background:#151515;color:#dfbd79;
+ font-size:22px;
+}
+.connect span{display:block;font-size:40px;margin-bottom:10px}
+.server,.item,.form-card{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:16px;padding:20px;margin-bottom:14px
+}
+.server{display:flex;align-items:center;gap:15px}
+.server-info{flex:1}
+.server-info small,.muted{
+ display:block;color:#888;font-size:11px;margin-top:8px
+}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.item{text-align:center;cursor:pointer}
+.item b{display:block;color:var(--gold);font-size:25px;margin-bottom:10px}
+h2{color:#dfbd79;font-size:20px;margin:15px 0}
+.input{
+ width:100%;background:#0c0c0c;
+ border:1px solid var(--border);
+ border-radius:12px;padding:16px;
+ color:white;font-size:13px;direction:ltr;
+ margin:18px 0;
+}
+.save{
+ width:100%;padding:16px;
+ background:var(--gold);color:#111;
+ border:0;border-radius:12px;
+ font-size:15px;font-weight:bold;
+}
+.result{
+ margin-top:18px;padding:15px;
+ background:#101010;border-radius:12px;
+ color:#aaa;font-size:13px;display:none
+}
+.nav{
+ position:fixed;bottom:0;left:0;right:0;
+ display:flex;justify-content:space-around;
+ background:#111;border-top:1px solid var(--border);
+ padding:14px 4px;
+}
+.nav div{text-align:center;color:#888;font-size:11px;cursor:pointer}
+.nav b{display:block;font-size:21px;margin-bottom:5px}
+.nav .active{color:var(--gold)}
+main{padding-bottom:80px}
+.footer{text-align:center;color:#a88b51;padding:30px;font-size:11px}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="menu">☰</div>
+ <div class="account">♛ حساب کاربری</div>
+</header>
+
+<div class="brand">
+ <div class="emblem">☼</div>
+ <h1>PERSIAN LEGEND</h1>
+ <p>BEYOND THE LIMITS</p>
+</div>
+
+<main>
+
+<section id="home" class="page active">
+ <div class="status">
+  <span id="status">● قطع شده</span>
+  <span>PING: -- ms</span>
+ </div>
+
+ <div class="connect-area">
+  <button class="connect" onclick="toggleConnection()">
+   <span>◉</span>
+   <span id="connectText">اتصال</span>
+  </button>
+ </div>
+
+ <div class="server">
+  <div style="font-size:30px">🌐</div>
+  <div class="server-info">
+   سرور انتخاب شده
+   <small id="serverName">هنوز سروری اضافه نشده</small>
+  </div>
+ </div>
+
+ <div class="grid">
+  <div class="item" onclick="showPage('subscription')">
+   <b>＋</b>افزودن ساب
+  </div>
+  <div class="item" onclick="showPage('servers')">
+   <b>◎</b>سرورهای من
+  </div>
+  <div class="item" onclick="alert('اشتراک من')">
+   <b>◇</b>اشتراک من
+  </div>
+  <div class="item" onclick="alert('تنظیمات')">
+   <b>⚙</b>تنظیمات
+  </div>
+ </div>
+</section>
+
+<section id="subscription" class="page">
+ <h2>افزودن اشتراک</h2>
+ <p class="muted">لینک سابسکریپشن خود را وارد کنید</p>
+
+ <div class="form-card">
+  <label>Subscription URL</label>
+  <input id="subLink" class="input"
+   type="url" placeholder="https://example.com/subscription">
+
+  <button class="save" onclick="saveSubscription()">
+   ذخیره و دریافت اطلاعات
+  </button>
+
+  <div class="result" id="result"></div>
+ </div>
+</section>
+
+<section id="servers" class="page">
+ <h2>سرورهای من</h2>
+ <div class="form-card" id="serverList">
+  هنوز سابسکریپشنی اضافه نشده است.
+ </div>
+</section>
+
+<div class="footer">PERSIAN LEGEND © 2026</div>
+
+</main>
+
+<nav class="nav">
+ <div class="active" onclick="showPage('home')"><b>⌂</b>خانه</div>
+ <div onclick="showPage('servers')"><b>◎</b>سرورها</div>
+ <div onclick="showPage('subscription')"><b>＋</b>افزودن ساب</div>
+ <div onclick="alert('تنظیمات')"><b>⚙</b>بیشتر</div>
+</nav>
+
+<script>
+function showPage(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav div').forEach(n=>n.classList.remove('active'));
+}
+
+function toggleConnection(){
+ alert('اتصال واقعی در مرحله راه‌اندازی هسته VPN فعال خواهد شد.');
+}
+
+
+async function saveSubscription(){
+ const link=document.getElementById('subLink').value.trim();
+ const result=document.getElementById('result');
+ const serverList=document.getElementById('serverList');
+
+ if(!link){
+  alert('لطفاً لینک را وارد کنید.');
+  return;
+ }
+
+ try{
+  const url=new URL(link);
+  if(!['https:','http:'].includes(url.protocol)){
+   throw new Error();
+  }
+ }catch(e){
+  alert('لینک معتبر نیست.');
+  return;
+ }
+
+ localStorage.setItem('persianLegendSub',link);
+ result.style.display='block';
+ result.textContent='در حال دریافت سرورها...';
+
+ try{
+  const response=await fetch(link);
+  if(!response.ok) throw new Error();
+
+  let content=await response.text();
+  let lines=content.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+
+  const types=['vless://','vmess://','trojan://','ss://'];
+
+  let servers=lines.filter(x=>
+   types.some(t=>x.toLowerCase().startsWith(t))
+  );
+
+  if(servers.length===0){
+   let decoded=atob(content.replace(/\s/g,''));
+   servers=decoded.split(/\r?\n/).filter(x=>
+    types.some(t=>x.toLowerCase().startsWith(t))
+   );
+  }
+
+  if(servers.length===0) throw new Error();
+
+  
+serverList.innerHTML='';
+serverList.style.display='grid';
+serverList.style.gap='12px';
+
+servers.forEach((x,i)=>{
+ const card=document.createElement('div');
+ card.style.cssText='background:#171717;border:1px solid #a88746;border-radius:14px;padding:16px;color:#eee;';
+
+ let rawName=x.split('#')[1] || '';
+ let name='سرور '+(i+1);
+
+ try{
+  name=decodeURIComponent(rawName) || name;
+ }catch(e){
+  name=rawName || name;
+ }
+
+ const protocol=x.split('://')[0].toUpperCase();
+
+ const title=document.createElement('div');
+ title.textContent=name;
+ title.style.cssText='font-size:16px;font-weight:bold;color:#d5b56b;margin-bottom:10px;';
+
+ const info=document.createElement('div');
+ info.textContent='پروتکل: '+protocol+' | پینگ: اندازه‌گیری نشده';
+
+ card.append(title,info);
+ serverList.appendChild(card);
+});
+
+  result.textContent='سرورها دریافت شدند.';
+
+ }catch(e){
+  result.textContent='لینک ذخیره شد، اما دریافت سرورها ناموفق بود.';
+  serverList.textContent='ممکن است محدودیت مرورگر یا مشکل فرمت وجود داشته باشد.';
+ }
+}
+
+</script>
+
+</body>
+</html>
+
